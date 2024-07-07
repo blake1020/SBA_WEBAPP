@@ -44,7 +44,7 @@ async function fetchInfo(id) {
         console.log(error);
     }
 
-    const currentCatInfoDump = (breed) => {
+    const currentDogInfoDump = (breed) => {
         infoDump.innerHTML = "";
         const catInfo = `
         <h3>${breed.name}</h3>
