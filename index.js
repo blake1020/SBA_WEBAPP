@@ -55,7 +55,19 @@ const loadFirst = async () => {
 };
 loadFirst();
 
+const currentDogInfoDump = (breed) => {
+    infoDump.innerHTML = "";
+    const dogInfo = `
+    <h3>${breed.name}</h3>
+    <p>${breed.description}</p>
+    <p><h3>Life Span</h3>: ${breed.life_span}</p>
+    <p>Temperament: ${breed.temperament}</p>
+    <p>Child Friendly: ${breed.child_friendly}</p>
+    <p>Bred For: ${breed.bred_for}`;
 
+    infoDump.textContent = dogInfo;
+  };
+  
 
 // const test = document.createElement("div")
 // test.textContent = "hi"
@@ -68,7 +80,8 @@ async function fetchInfo(id) {
         for(let d = 0; d < response.length; d++) {
             console.log(response[d]);
             // Carousel.createCarouselItem(response[d].url, "Picture of Puppers", response[d].id);
-           
+
+           currentDogInfoDump(response[d].breeds[d]);
             Carousel.appendCarousel(Carousel.createCarouselItem(response[d].url, "Picture of Puppers", response[d].id)
         );
 
@@ -78,27 +91,26 @@ async function fetchInfo(id) {
         console.log(error);
     }
 
-    const currentDogInfoDump = (breed) => {
-        info.innerHTML = "";
-        const dogInfo = `
-        <h3>${breed.name}</h3>
-        <p>${breed.description}</p>
-        <p><h3>Life Span</h3>: ${breed.life_span}</p>
-        <p>Temperament: ${breed.temperament}</p>
-        <p>Child Friendly: ${breed.child_friendly}</p>
-        <p>Bred For: ${breed.bred_for}`;
-
-        info.textContent = dogInfo;
-      };
-      
+}
+const changeCarousel = (breeds) => {
+    Carousel.clear();
+    breeds.forEach((item) => {
+        console.log(item);
+        const carouselDog = Carousel.createCarouselItem(
+            item.url,
+            item.breeds[0].name,
+            item.id
+        );
+        Carousel.start();
+    })
 }
 
-// axios.get()
-//   .then(function (response) {
-//     console.log(response.data);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+axios.get()
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 //display images 
