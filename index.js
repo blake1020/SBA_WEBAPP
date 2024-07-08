@@ -60,12 +60,12 @@ const currentDogInfoDump = (breed) => {
     const dogInfo = `
     <h3>${breed.name}</h3>
     <p>${breed.description}</p>
-    <p><h3>Life Span</h3>: ${breed.life_span}</p>
-    <p>Temperament: ${breed.temperament}</p>
-    <p>Child Friendly: ${breed.child_friendly}</p>
-    <p>Bred For: ${breed.bred_for}`;
-
-    infoDump.textContent = dogInfo;
+    <p><strong>Life Span</strong></h3>: ${breed.life_span}</p>
+    <p><strong>Temperament:</strong> ${breed.temperament}</p>
+    <p><strong>Child Friendly:</strong> ${breed.child_friendly}</p>
+    <p><strong>Bred For</strong>: ${breed.bred_for}</p>
+    `;
+    infoDump.innerHTML = dogInfo;
   };
   
 
@@ -80,8 +80,8 @@ async function fetchInfo(id) {
         for(let d = 0; d < response.length; d++) {
             console.log(response[d]);
             // Carousel.createCarouselItem(response[d].url, "Picture of Puppers", response[d].id);
-
-           currentDogInfoDump(response[d].breeds[d]);
+            changeCarousel(response);
+           currentDogInfoDump(response[d].breeds[0]);
             Carousel.appendCarousel(Carousel.createCarouselItem(response[d].url, "Picture of Puppers", response[d].id)
         );
 
@@ -92,6 +92,7 @@ async function fetchInfo(id) {
     }
 
 }
+
 const changeCarousel = (breeds) => {
     Carousel.clear();
     breeds.forEach((item) => {
@@ -101,8 +102,9 @@ const changeCarousel = (breeds) => {
             item.breeds[0].name,
             item.id
         );
-        Carousel.start();
+        Carousel.appendCarousel(carouselDog);
     })
+    Carousel.start();
 }
 
 axios.get()
