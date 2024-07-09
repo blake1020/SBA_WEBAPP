@@ -59,12 +59,13 @@ const currentDogInfoDump = (breed) => {
     infoDump.innerHTML = "";
     const dogInfo = `
     <h3>${breed.name}</h3>
-    <p>${breed.description}</p>
+    <p><strong>Description:</strong> ${breed.description}</p>
     <p><strong>Life Span</strong></h3>: ${breed.life_span}</p>
     <p><strong>Temperament:</strong> ${breed.temperament}</p>
     <p><strong>Child Friendly:</strong> ${breed.child_friendly}</p>
     <p><strong>Bred For</strong>: ${breed.bred_for}</p>
-    `;
+    <p><strong>Breed Group:</strong> ${breed.breed_group}`;
+
     infoDump.innerHTML = dogInfo;
   };
   
@@ -115,4 +116,4 @@ axios.get()
     console.log(error);
   });
 
-//display images 
+
